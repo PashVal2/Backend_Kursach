@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/reg.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Регистрация</title>
+</head>
+<body>
+<header>
+    <nav>
+        <box>
+            <a href="/"><img src="/icon/ic.png" alt="Logo" id="logo"></a>
+            <ul>
+                <li><a href="">О нас</a></li>
+                <li><a href="/property">Недвижимость</a></li>
+                <li><a href="/login">Войти</a></li>
+            </ul>
+        </box>
+        <box>
+            <ul>
+                <li><a href="/login">Войти</a></li>
+            </ul>
+        </box>
+    </nav>
+</header>
+
+<main>
+    <section id="home">
+        <h1>Регистрация</h1>
+        <form action="/register" method="post">
+            <div class="form-group">
+                <label for="username">Логин:</label>
+                <input type="text" id="username" name="username" placeholder="Введите логин" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Подтвердите пароль:</label>
+                <input type="password" id="confirm-password" name="confirmPassword" placeholder="Повторите пароль" required>
+            </div>
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <p>Уже есть аккаунт? <a href="/login">Войдите</a></p>
+    </section>
+</main>
+<footer class="container">
+    <p>&copy; 2024 Система управления арендой недвижимости</p>
+</footer>
+</body>
+</html>
