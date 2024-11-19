@@ -26,7 +26,10 @@
                     <a href="/register">Зарегестрироваться</a>
                 </li>
                 <li class="dropdown" th:if="${showLogout}">
-                    <a href="javascript:void(0);" class="dropdown-toggle" th:text="${name}"></a>
+                    <a href="javascript:void(0);" class="dropdown-toggle">
+                        <p th:text="${name}"/>
+                        <img src="/icon/iconsArrow.png" alt="arrow" id="arrow">
+                    </a>
                     <div class="dropdown-menu">
                         <a href="/login">Сменить аккаунт</a>
                         <a href="/logout">Выйти</a>

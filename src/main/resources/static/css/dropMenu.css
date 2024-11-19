@@ -18,6 +18,12 @@
     text-decoration: none;
 }
 
+.dropdown a p {
+    margin: 0;
+    display: inline-block;
+    font-size: 18px;
+}
+
 .dropdown-menu a:hover {
     transition: none;
     background-color: white;
