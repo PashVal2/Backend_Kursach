@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeRequests(auth -> { // доступ для не зарегестрированного юзера
                     auth.antMatchers(
-                            "/", "/index", "/login",
+                            "/", "/index", "/login", "/js/**",
                             "/register", "/css/**", "/property", "/icon/**"
                     ).permitAll();
                     auth.anyRequest().authenticated();

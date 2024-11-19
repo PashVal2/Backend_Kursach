@@ -1,10 +1,12 @@
 package org.example;
 
 import org.example.repos.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import static org.example.MyController.isAuth;
 
 @Controller
 public class AuthController {
@@ -13,7 +15,11 @@ public class AuthController {
         this.userService = userService;
     }
     @GetMapping("/register")
-    public String showRegistrationPage() {
+    public String showRegistrationPage(Model model, Authentication authentication) {
+        model.addAttribute("showLogout", isAuth(authentication));
+        if(isAuth(authentication)) {
+            model.addAttribute("name", authentication.getName());
+        }
         return "register";
     }
     @PostMapping("/register")
@@ -31,7 +37,11 @@ public class AuthController {
         }
     }
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(Model model, Authentication authentication) {
+        model.addAttribute("showLogout", isAuth(authentication));
+        if(isAuth(authentication)) {
+            model.addAttribute("name", authentication.getName());
+        }
         return "login";
     }
 }

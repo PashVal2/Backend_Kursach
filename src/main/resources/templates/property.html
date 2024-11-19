@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/dropMenu.css">
     <title>Недвижимость</title>
 </head>
 <body>
@@ -22,8 +23,12 @@
                 <li th:if="${not showLogout}">
                     <a href="/login">Войти</a>
                 </li>
-                <li th:if="${showLogout}">
-                    <a href="/logout">Выйти</a>
+                <li class="dropdown" th:if="${showLogout}">
+                    <a href="javascript:void(0);" class="dropdown-toggle" th:text="${name}"></a>
+                    <div class="dropdown-menu">
+                        <a href="/login">Сменить аккаунт</a>
+                        <a href="/logout">Выйти</a>
+                    </div>
                 </li>
             </ul>
         </box>
@@ -55,5 +60,7 @@
 <footer>
     <p>&copy; 2024 Система управления арендой недвижимости</p>
 </footer>
+
 </body>
+<script src="/js/menu.js"></script>
 </html>

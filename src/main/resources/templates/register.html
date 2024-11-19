@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/reg.css">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/dropMenu.css">
     <title>Регистрация</title>
 </head>
 <body>
@@ -17,12 +18,20 @@
             <ul>
                 <li><a href="">О нас</a></li>
                 <li><a href="/property">Недвижимость</a></li>
-                <li><a href="/login">Войти</a></li>
             </ul>
         </box>
         <box>
             <ul>
-                <li><a href="/login">Войти</a></li>
+                <li th:if="${not showLogout}">
+                    <a href="/login">Войти</a>
+                </li>
+                <li class="dropdown" th:if="${showLogout}">
+                    <a href="javascript:void(0);" class="dropdown-toggle" th:text="${name}"></a>
+                    <div class="dropdown-menu">
+                        <a href="/login">Сменить аккаунт</a>
+                        <a href="/logout">Выйти</a>
+                    </div>
+                </li>
             </ul>
         </box>
     </nav>
@@ -52,5 +61,7 @@
 <footer class="container">
     <p>&copy; 2024 Система управления арендой недвижимости</p>
 </footer>
+
 </body>
+<script src="/js/menu.js"></script>
 </html>

@@ -24,12 +24,18 @@ public class MyController {
         List<Property> properties = propertyRepository.findAll();
         model.addAttribute("properties", properties);
         model.addAttribute("showLogout", isAuth(authentication));
+        if(isAuth(authentication)) {
+            model.addAttribute("name", authentication.getName());
+        }
         return "property"; // Имя HTML-шаблона, который мы создадим
     }
     @GetMapping("/")
     public String index(Model model, Authentication authentication) {
         model.addAttribute("message", "b");
         model.addAttribute("showLogout", isAuth(authentication));
+        if(isAuth(authentication)) {
+            model.addAttribute("name", authentication.getName());
+        }
         return "index";
     }
     @GetMapping("/property/{id}")
@@ -37,9 +43,12 @@ public class MyController {
         Property property = propertyRepository.findById(id).orElse(null);
         model.addAttribute("property", property);
         model.addAttribute("showLogout", isAuth(authentication));
+        if(isAuth(authentication)) {
+            model.addAttribute("name", authentication.getName());
+        }
         return "property-details";
     }
-    public boolean isAuth(Authentication authentication) {
+    public static boolean isAuth(Authentication authentication) {
         if (authentication != null &&
                 authentication.isAuthenticated()) {
             return true;
