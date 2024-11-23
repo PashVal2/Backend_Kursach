@@ -20,6 +20,9 @@
             <ul>
                 <li><a href="">О нас</a></li>
                 <li><a href="/property">Недвижимость</a></li>
+                <li th:if="${ADMIN}">
+                    <a href="/addProperty">Добавить недвижимость</a>
+                </li>
             </ul>
         </box>
         <box>

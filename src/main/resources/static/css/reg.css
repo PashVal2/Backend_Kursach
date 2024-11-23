@@ -5,6 +5,16 @@ form {
     margin: 0 auto;
 }
 
+.errorLine {
+    color: indianred;
+    font-size: 12px;
+}
+
+.addLine {
+    color: forestgreen;
+    font-size: 12px;
+}
+
 .form-group {
     margin-bottom: 15px;
     text-align: left;
@@ -40,3 +50,4 @@ p {
 a {
     color: #2c3e50;
 }
+

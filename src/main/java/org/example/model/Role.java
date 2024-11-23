@@ -3,16 +3,19 @@ package org.example.model;
 import javax.persistence.*;
 
 @Entity
-public class Property {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private Long id;
-    @Column(nullable = false, length = 255)
+    @Column(columnDefinition = "VARCHAR(255) DEFAULT 'USER' NOT NULL")
     private String name;
-    public Property() {}
-    public Property(Long id) {
+    public Role() {}
+    public Role(Long id, String name) {
+        this.name = name;
         this.id = id;
     }
+
     public Long getId() {
         return id;
     }

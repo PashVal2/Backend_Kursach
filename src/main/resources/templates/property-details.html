@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/calendar.css">
     <link rel="stylesheet" href="/css/dropMenu.css">
     <title>Документ</title>
 </head>
@@ -18,6 +19,9 @@
             <ul>
                 <li><a href="">О нас</a></li>
                 <li><a href="/property">Недвижимость</a></li>
+                <li th:if="${ADMIN}">
+                    <a href="/addProperty">Добавить недвижимость</a>
+                </li>
             </ul>
         </box>
         <box>
@@ -45,6 +49,25 @@
     <section id="home">
         <h1 th:text="${property.name}"></h1>
     </section>
+    <div class="calendar">
+        <div class="calendar-header">
+            <button class="prev-month" onclick="changeMonth(-1)">&#10094;</button>
+            <h2 class="month-year"></h2>
+            <button class="next-month" onclick="changeMonth(1)">&#10095;</button>
+        </div>
+
+        <div class="calendar-days">
+            <div class="day">Пн</div>
+            <div class="day">Вт</div>
+            <div class="day">Ср</div>
+            <div class="day">Чт</div>
+            <div class="day">Пт</div>
+            <div class="day">Сб</div>
+            <div class="day">Вс</div>
+        </div>
+
+        <div class="calendar-dates"></div>
+    </div>
 </main>
 
 <footer class="container">
@@ -53,4 +76,5 @@
 
 </body>
 <script src="/js/menu.js"></script>
+<script src="/js/calendar.js"></script>
 </html>

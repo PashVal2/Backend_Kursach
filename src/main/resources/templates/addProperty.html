@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- Убедитесь, что здесь установлена кодировка UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/dropMenu.css">
-    <title>Недвижимость</title>
+    <link rel="stylesheet" href="/css/reg.css">
+    <link rel="icon" type="image/png" href="/icon/ic.png">
+    <title>Добавление апартаментов</title>
 </head>
 <body>
 <header>
@@ -16,9 +21,6 @@
             <ul>
                 <li><a href="">О нас</a></li>
                 <li><a href="/property">Недвижимость</a></li>
-                <li th:if="${ADMIN}">
-                    <a href="/addProperty">Добавить недвижимость</a>
-                </li>
             </ul>
         </box>
         <box>
@@ -40,33 +42,22 @@
         </box>
     </nav>
 </header>
-
 <main>
-    <section id="home">
-        <h1>Тут вы найдете недвижимость!</h1>
-    </section>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Название</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="property : ${properties}">
-            <td th:text="${property.id}"></td>
-            <td>
-                <a th:href="@{/property/{id}(id=${property.id})}" th:text="${property.name}"></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <h1>
+        Эта страница только для администратора
+    </h1>
+    <form action="/addProperty" method="post">
+        <div class="form-group">
+            <label for="name">Название апартаментов:</label>
+            <input type="text" id="name" name="name" placeholder="Введите название" required>
+            <label class="addLine" th:if="${error == null && isPost}">Апартаменты добавились</label>
+            <label class="errorLine" th:if="${error != null}" th:text="${error}"></label>
+        </div>
+        <button type="submit">Добавить</button>
+    </form>
 </main>
-
-<footer>
+<footer class="container">
     <p>&copy; 2024 Система управления арендой недвижимости</p>
 </footer>
-
 </body>
-<script src="/js/menu.js"></script>
 </html>

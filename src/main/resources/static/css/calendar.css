@@ -1,0 +1,71 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #2c3e50;
+    color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.calendar-days {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.day {
+    width: calc(100% / 7);
+    text-align: center;
+    padding: 5px;
+    box-sizing: border-box;
+    border-right: 1px solid #ddd;
+}
+
+.day:last-child {
+    border-right: none;
+}
+
+.calendar-dates {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 5px;
+    background-color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.date {
+    width: calc(100% / 7);
+    text-align: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.date:hover {
+    background-color: #f4f4f4;
+}
+
+.date.selected {
+    background-color: #34495e;
+    color: white;
+    border-radius: 5px; /* Для круглого выделения */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

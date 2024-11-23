@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import static org.example.MyController.isAuth;
 
 @Controller
@@ -23,9 +24,14 @@ public class AuthController {
         return "register";
     }
     @PostMapping("/register")
-    public String registerUser(String username, String password, String confirmPassword, Model model) {
+    public String registerUser(String username, String password, Authentication authentication,
+           String confirmPassword, Model model) {
+        model.addAttribute("showLogout", isAuth(authentication));
+        if(isAuth(authentication)) {
+            model.addAttribute("name", authentication.getName());
+        }
         if (!password.equals(confirmPassword)) {
-            model.addAttribute("error", "Passwords do not match");
+            model.addAttribute("error", "Пароли не совападают");
             return "register";
         }
         try {

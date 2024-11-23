@@ -55,6 +55,7 @@
             <div class="form-group">
                 <label for="confirm-password">Подтвердите пароль:</label>
                 <input type="password" id="confirm-password" name="confirmPassword" placeholder="Повторите пароль" required>
+                <label class="errorLine" th:if="${error != null}" th:text="${error}"></label>
             </div>
             <button type="submit">Зарегистрироваться</button>
         </form>

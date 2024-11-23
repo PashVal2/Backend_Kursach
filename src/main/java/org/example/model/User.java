@@ -7,11 +7,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, length = 255)
     private String name;
+    @Column(nullable = false, length = 255)
     private String password;
+    @OneToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
     // Конструкторы, геттеры и сеттеры
     public User() {}
-
     public User(String username, String password) {
         this.name = username;
         this.password = password;
@@ -37,5 +41,13 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
