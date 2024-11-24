@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Dates {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "date_id")
     private Long id;
     private int year;
     private int month;
@@ -13,6 +14,9 @@ public class Dates {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "property_id", nullable = false)
+    private Property property;
     public Dates() {}
     public Dates(Long id, int year,
                  int month, int day) {
@@ -64,5 +68,13 @@ public class Dates {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
     }
 }

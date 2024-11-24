@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface DateRepository extends JpaRepository<Dates, Long> {
     List<Dates> findByYearAndMonth(String year, int month);
+    List<Dates> findByPropertyId(Long PropertyId);
 }

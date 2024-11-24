@@ -46,8 +46,9 @@ public class MyController {
         }
         return "index";
     }
-    @GetMapping("/property/{id}")
-    public String getSpecificProperties(@PathVariable Long id, Model model, Authentication authentication) {
+    @GetMapping("/property/{name}_{id}")
+    public String getSpecificProperties(@PathVariable Long id, @PathVariable String name,
+            Model model, Authentication authentication) {
         Property property = propertyRepository.findById(id).orElse(null);
         model.addAttribute("property", property);
         model.addAttribute("showLogout", isAuth(authentication));

@@ -10,8 +10,10 @@ import java.util.List;
 @Service
 public class DateService {
     private final DateRepository dateRepository;
-    public DateService(DateRepository dateRepository) {
+    private final PropertyRepository propertyRepository;
+    public DateService(DateRepository dateRepository, PropertyRepository propertyRepository) {
         this.dateRepository = dateRepository;
+        this.propertyRepository = propertyRepository;
     }
     public void addDates(List<BookingDates> bookingDatesList,
          User user) {
@@ -20,6 +22,9 @@ public class DateService {
             date.setDay(bookingDate.getDay());
             date.setMonth(bookingDate.getMonth());
             date.setYear(bookingDate.getYear());
+            date.setProperty(
+                propertyRepository.findById(bookingDate.getPropertyId()).get()
+            );
             date.setUser(user);
             dateRepository.save(date);
         }

@@ -56,7 +56,7 @@
         <tr th:each="property : ${properties}">
             <td th:text="${property.id}"></td>
             <td>
-                <a th:href="@{/property/{id}(id=${property.id})}" th:text="${property.name}"></a>
+                <a th:href="@{/property/{name}_{id}(id=${property.id}, name=${property.name})}" th:text="${property.name}"></a>
             </td>
         </tr>
         </tbody>

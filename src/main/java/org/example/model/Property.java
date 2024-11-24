@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "property_id")
     private Long id;
     @Column(nullable = false, length = 255)
     private String name;

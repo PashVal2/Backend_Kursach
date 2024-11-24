@@ -4,6 +4,15 @@ public class BookingDates {
     private int year;
     private int month;
     private int day;
+    private Long property_id;
+    public BookingDates() {}
+    public BookingDates(Dates date, Long property_id) {
+        this.day = date.getDay();
+        this.year = date.getYear();
+        this.property_id = property_id;
+        this.month = date.getMonth();
+    }
+
     @Override
     public String toString() {
         return year + "-" + month + "-" + day;
@@ -30,5 +39,13 @@ public class BookingDates {
 
     public void setDay(int day) {
         this.day = day;
+    }
+
+    public Long getPropertyId() {
+        return property_id;
+    }
+
+    public void setPropertyId(Long property_id) {
+        this.property_id = property_id;
     }
 }
