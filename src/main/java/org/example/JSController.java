@@ -31,7 +31,7 @@ public class JSController {
         this.dateRepository = dateRepository;
         this.userRepository = userRepository;
     }
-    @GetMapping("/book-dates/{id}")
+    @GetMapping("/book-dates/{propertyId}")
     public ResponseEntity<List<BookingDates>> TransitDates(
         @PathVariable Long propertyId) {
         List<Dates> dates = dateRepository.findByPropertyId(propertyId);
@@ -40,7 +40,6 @@ public class JSController {
         for (Dates date: dates) {
             bookingDates.add(new BookingDates(date, propertyId));
         }
-
         return ResponseEntity.ok(bookingDates);
     }
 

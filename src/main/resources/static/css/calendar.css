@@ -50,6 +50,16 @@
     border-bottom-right-radius: 10px;
 }
 
+.booked {
+    width: calc(100% / 7);
+    text-align: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+}
+
 .date {
     width: calc(100% / 7);
     text-align: center;

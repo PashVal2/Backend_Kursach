@@ -10,6 +10,9 @@ const url = window.location.href;
 const pathParts = url.split('/');
 const propertyId = pathParts[pathParts.length - 1].split('_')[1];
 
+let databaseDate = [];
+getDates();
+
 function renderCalendar(date) {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -44,37 +47,45 @@ function renderCalendar(date) {
     // дни
     for (let day = 1; day <= lastDayOfMonth.getDate(); day++) {
         const dateElement = document.createElement("div");
-        dateElement.classList.add("date");
         dateElement.textContent = day;
         calendarDates.appendChild(dateElement);
-
-        dateElement.addEventListener("click", () => {
-            const day = parseInt(dateElement.textContent); // Парсим текст элемента как число
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            const dateKey = `${year}-${month}-${day}`; // Используем правильную интерполяцию строк
-            // Используем toggle для изменения класса и сохраняем результат (true - добавлено, false - удалено)
-            if (dateElement.classList.toggle("selected")) {
-                // Если добавили класс "selected", добавляем дату в массив
-                selectedDates.push({ propertyId, year, month, day });
-            } else {
-                // Если убрали класс "selected", удаляем дату из массива
-                const i = selectedDates.findIndex(
-                    (date) => `${date.year}-${date.month}-${date.day}` === dateKey
-                );
-                if (i !== -1) selectedDates.splice(i, 1); // Удаляем элемент по индексу
-            }
-            console.log(selectedDates);
-        });
+        
+        const currentDay = new Date(year, month, day);
+        if (isDateBooked(currentDay)) {
+            dateElement.classList.add("booked")
+        }
+        else {
+            dateElement.classList.add("date");
+            dateElement.addEventListener("click", () => {
+                const dateKey = `${year}-${month}-${day}`; // Используем правильную интерполяцию строк
+                // Используем toggle для изменения класса и сохраняем результат (true - добавлено, false - удалено)
+                if (dateElement.classList.toggle("selected")) {
+                    // Если добавили класс "selected", добавляем дату в массив
+                    selectedDates.push({ propertyId, year, month, day });
+                } else {
+                    // Если убрали класс "selected", удаляем дату из массива
+                    const i = selectedDates.findIndex(
+                        (date) => `${date.year}-${date.month}-${date.day}` === dateKey
+                    );
+                    if (i !== -1) selectedDates.splice(i, 1); // Удаляем элемент по индексу
+                }
+                console.log(selectedDates);
+            });
+        }
     }
 }
 
 function changeMonth(offset) {
     currentDate.setMonth(currentDate.getMonth() + offset);
-    renderCalendar(currentDate);
+    initializeCalendar(currentDate);
 }
 
-renderCalendar(currentDate);
+function initializeCalendar() {
+    getDates().then(() => {
+        renderCalendar(currentDate);
+    });
+}
+initializeCalendar(currentDate);
 
 prevMonthBtn.addEventListener("click", () => changeMonth(-1));
 nextMonthBtn.addEventListener("click", () => changeMonth(1));
@@ -89,17 +100,32 @@ function submitDates() {
         body: JSON.stringify(selectedDates)
     })
     .then(response => response.json())
-    .then(data => {
-        console.log('Загрузка ', data);
+    .then(responseData => {
+        console.log('Загрузка ', responseData);
     })
 }
 
 function getDates() {
-    fetch(`/api/book-dates/${propertyID}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log("Забронированные даты: ", data);
-    });
+    return new Promise((resolve) => {
+        fetch(`/api/book-dates/${propertyId}`)
+        .then(response => response.json())
+        .then(gettedData => {
+            for (let item of gettedData) {
+                databaseDate.push(new Date(item.year, item.month, item.day));
+            }
+            console.log("Забронированные даты: ", gettedData);
+            resolve();
+        });
+    })
 }
 
+function isDateBooked(compareDate) {
+    for (let item of databaseDate) {
+        if (item.getFullYear() === compareDate.getFullYear() &&
+            item.getMonth() === compareDate.getMonth() &&
+            item.getDate() === compareDate.getDate()) {
+            return true;
+        }
+    }
+}
 
