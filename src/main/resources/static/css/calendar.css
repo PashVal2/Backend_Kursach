@@ -69,3 +69,23 @@
     border-radius: 5px; /* Для круглого выделения */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.calendar-submit {
+    text-align: center; /* Центрирование кнопки */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+#submit-dates {
+    background-color: #34495e; /* Синий фон */
+    color: #ffffff; /* Белый текст */
+    padding: 10px 20px; /* Внутренние отступы */
+    font-size: 16px; /* Размер текста */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Курсор-указатель */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Плавные эффекты */
+}
+
+#submit-dates:active {
+    background-color: #506d92; /* Более темный синий при нажатии */
+}

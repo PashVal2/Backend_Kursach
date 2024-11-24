@@ -21,7 +21,6 @@ public class UserService implements UserDetailsService {
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
     public void register(String name, String password) {
         // Проверка, существует ли уже пользователь с таким именем
         if (userRepository.findByName(name).isPresent()) {

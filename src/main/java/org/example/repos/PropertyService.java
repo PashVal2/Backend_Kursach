@@ -11,7 +11,6 @@ public class PropertyService {
     }
     public void addProperty(String name) {
         if(propertyRepository.findByName(name).isPresent()) {
-
             return;
         }
         Property property = new Property();
