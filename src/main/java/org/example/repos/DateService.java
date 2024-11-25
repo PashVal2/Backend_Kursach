@@ -2,6 +2,7 @@ package org.example.repos;
 
 import org.example.model.BookingDates;
 import org.example.model.Dates;
+import org.example.model.Property;
 import org.example.model.User;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,18 @@ public class DateService {
          User user) {
         for (BookingDates bookingDate: bookingDatesList) {
             Dates date = new Dates();
-            date.setDay(bookingDate.getDay());
-            date.setMonth(bookingDate.getMonth());
-            date.setYear(bookingDate.getYear());
-            date.setProperty(
-                propertyRepository.findById(bookingDate.getPropertyId()).get()
-            );
+            Property property = new Property();
+            property = propertyRepository.findById(bookingDate.getPropertyId()).get();
+            int day = bookingDate.getDay();
+            int month = bookingDate.getMonth();
+            int year = bookingDate.getYear();
+            if (!dateRepository.findByYearAndMonthAndDayAndPropertyId(year, month, day, property.getId()).isEmpty()) {
+                continue;
+            }
+            date.setDay(day);
+            date.setMonth(month);
+            date.setYear(year);
+            date.setProperty(property);
             date.setUser(user);
             dateRepository.save(date);
         }

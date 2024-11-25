@@ -49,10 +49,16 @@ function renderCalendar(date) {
         const dateElement = document.createElement("div");
         dateElement.textContent = day;
         calendarDates.appendChild(dateElement);
-        
         const currentDay = new Date(year, month, day);
-        if (isDateBooked(currentDay)) {
-            dateElement.classList.add("booked")
+        const bookingInfo = isDateBooked(currentDay);
+        
+        if (bookingInfo) {
+            if (bookingInfo.userIsOwner) {
+                dateElement.classList.add("ownerBooked");
+            }
+            else {
+                dateElement.classList.add("booked");
+            }
         }
         else {
             dateElement.classList.add("date");
@@ -101,6 +107,7 @@ function submitDates() {
     })
     .then(response => response.json())
     .then(responseData => {
+        initializeCalendar(currentDate);
         console.log('Загрузка ', responseData);
     })
 }
@@ -111,7 +118,10 @@ function getDates() {
         .then(response => response.json())
         .then(gettedData => {
             for (let item of gettedData) {
-                databaseDate.push(new Date(item.year, item.month, item.day));
+                databaseDate.push({
+                    date: new Date(item.year, item.month, item.day), // Исправлено: `month - 1` для корректного месяца
+                    userIsOwner: item.userIsOwner
+                });
             }
             console.log("Забронированные даты: ", gettedData);
             resolve();
@@ -121,11 +131,12 @@ function getDates() {
 
 function isDateBooked(compareDate) {
     for (let item of databaseDate) {
-        if (item.getFullYear() === compareDate.getFullYear() &&
-            item.getMonth() === compareDate.getMonth() &&
-            item.getDate() === compareDate.getDate()) {
-            return true;
+        if (item.date.getFullYear() === compareDate.getFullYear() &&
+            item.date.getMonth() === compareDate.getMonth() &&
+            item.date.getDate() === compareDate.getDate()) {
+            return item;
         }
     }
+    return null;
 }
 

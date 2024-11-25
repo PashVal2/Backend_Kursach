@@ -57,6 +57,18 @@
     box-sizing: border-box;
     border-bottom: 1px solid #ddd;
     background-color: #d3d3d3;
+    border-radius: 5px;
+    cursor: not-allowed;
+}
+
+.ownerBooked {
+    width: calc(100% / 7);
+    text-align: center;
+    padding: 10px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #82b870;
+    background-color: #82b870;
+    border-radius: 5px;
     cursor: not-allowed;
 }
 
@@ -76,23 +88,23 @@
 .date.selected {
     background-color: #34495e;
     color: white;
-    border-radius: 5px; /* Для круглого выделения */
+    border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .calendar-submit {
-    text-align: center; /* Центрирование кнопки */
-    margin-top: 20px; /* Отступ сверху */
+    text-align: center;
+    margin-top: 20px;
 }
 
 #submit-dates {
-    background-color: #34495e; /* Синий фон */
-    color: #ffffff; /* Белый текст */
-    padding: 10px 20px; /* Внутренние отступы */
-    font-size: 16px; /* Размер текста */
-    border: none; /* Убираем границу */
-    border-radius: 5px; /* Закругленные углы */
-    cursor: pointer; /* Курсор-указатель */
+    background-color: #34495e;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease; /* Плавные эффекты */
 }
 

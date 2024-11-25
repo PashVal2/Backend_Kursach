@@ -12,10 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -32,15 +29,21 @@ public class JSController {
         this.userRepository = userRepository;
     }
     @GetMapping("/book-dates/{propertyId}")
-    public ResponseEntity<List<BookingDates>> TransitDates(
-        @PathVariable Long propertyId) {
+    public ResponseEntity<List<Map<String, Object>>> TransitDates(
+        @PathVariable Long propertyId, Authentication authentication) {
         List<Dates> dates = dateRepository.findByPropertyId(propertyId);
+        User user = userRepository.findByName(authentication.getName()).get();
 
-        List<BookingDates> bookingDates = new ArrayList<BookingDates>();
+        List<Map<String, Object>> maps = new ArrayList<>();
         for (Dates date: dates) {
-            bookingDates.add(new BookingDates(date, propertyId));
+            Map<String, Object> map = new HashMap<>();
+            map.put("day", date.getDay());
+            map.put("year", date.getYear());
+            map.put("month", date.getMonth());
+            map.put("userIsOwner", date.getUser().getId().equals(user.getId()));
+            maps.add(map);
         }
-        return ResponseEntity.ok(bookingDates);
+        return ResponseEntity.ok(maps);
     }
 
     @PostMapping("/book-dates")
