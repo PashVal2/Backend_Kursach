@@ -4,6 +4,7 @@ const prevMonthBtn = document.querySelector(".prev-month");
 const nextMonthBtn = document.querySelector(".next-month");
 
 let currentDate = new Date();
+const realDate = new Date();
 const selectedDates = [];
 
 const url = window.location.href;
@@ -16,6 +17,23 @@ getDates();
 function renderCalendar(date) {
     const year = date.getFullYear();
     const month = date.getMonth();
+
+    if (realDate.getFullYear() === date.getFullYear()
+        && realDate.getMonth() === date.getMonth()) {
+            prevMonthBtn.style.visibility = "hidden";
+            // prevMonthBtn.style.pointerEvents = "none";
+    }
+    else {
+        prevMonthBtn.style.visibility = "visible";
+    }
+
+    if ((realDate.getFullYear() + 1) === date.getFullYear()
+    && realDate.getMonth() === date.getMonth()) {
+        nextMonthBtn.style.visibility = "hidden";
+    }
+    else {
+        nextMonthBtn.style.visibility = "visible";
+    }
 
     const firstDayOfMonth = new Date(year, month, 1);
     const lastDayOfMonth = new Date(year, month + 1, 0);
@@ -82,8 +100,10 @@ function renderCalendar(date) {
 }
 
 function changeMonth(offset) {
-    currentDate.setMonth(currentDate.getMonth() + offset);
-    initializeCalendar(currentDate);
+    const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + offset, 1);
+    console.log("Меняем месяц на:", newDate);
+    currentDate = newDate;
+    initializeCalendar();
 }
 
 function initializeCalendar() {
@@ -92,9 +112,6 @@ function initializeCalendar() {
     });
 }
 initializeCalendar(currentDate);
-
-prevMonthBtn.addEventListener("click", () => changeMonth(-1));
-nextMonthBtn.addEventListener("click", () => changeMonth(1));
 
 function submitDates() {
     console.log("Выбранные даты для бронирования:", selectedDates);
@@ -117,6 +134,7 @@ function getDates() {
         fetch(`/api/book-dates/${propertyId}`)
         .then(response => response.json())
         .then(gettedData => {
+            databaseDate = [];
             for (let item of gettedData) {
                 databaseDate.push({
                     date: new Date(item.year, item.month, item.day), // Исправлено: `month - 1` для корректного месяца
