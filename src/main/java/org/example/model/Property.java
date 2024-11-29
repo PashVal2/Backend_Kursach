@@ -10,10 +10,13 @@ public class Property {
     private Long id;
     @Column(nullable = false, length = 255)
     private String name;
+    @Column(nullable = false)
+    private double latitude;
+    @Column(nullable = false)
+    private double longitude;
+    @Column(nullable = false, length = 255)
+    private String description;
     public Property() {}
-    public Property(Long id) {
-        this.id = id;
-    }
     public Long getId() {
         return id;
     }
@@ -28,5 +31,29 @@ public class Property {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

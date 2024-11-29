@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> { // доступ для не зарегестрированного юзера
                     auth.antMatchers(
                             "/", "/index", "/login", "/js/**",
-                            "/register", "/css/**", "/property", "/icon/**"
+                            "/register", "/css/**", "/property", "/icon/**", "/api/**"
                     ).permitAll();
                     auth.antMatchers("/addProperty").hasRole("ADMIN");
                     auth.anyRequest().authenticated();

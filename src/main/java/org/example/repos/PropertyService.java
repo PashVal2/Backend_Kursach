@@ -15,6 +15,9 @@ public class PropertyService {
         }
         Property property = new Property();
         property.setName(name);
+        property.setDescription("");
+        property.setLatitude(0.0);
+        property.setLongitude(0.0);
         propertyRepository.save(property);
     }
 }

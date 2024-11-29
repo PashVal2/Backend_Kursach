@@ -1,0 +1,40 @@
+#map {
+    margin: 20px auto;
+    border: 4px solid #2c3e50;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    height: 70vh;
+    background-color: #ecf0f1;
+}
+
+.marker-class {
+    cursor: pointer;
+}
+
+.marker-class a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+}
+
+.marker-dot {
+    width: 12px;
+    height: 12px;
+    background-color: red;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.marker-text {
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+    border-radius: 5px;
+    padding: 3px;
+}
+

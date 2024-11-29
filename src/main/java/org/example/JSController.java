@@ -2,9 +2,11 @@ package org.example;
 
 import org.example.model.BookingDates;
 import org.example.model.Dates;
+import org.example.model.Property;
 import org.example.model.User;
 import org.example.repos.DateRepository;
 import org.example.repos.DateService;
+import org.example.repos.PropertyRepository;
 import org.example.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +24,13 @@ public class JSController {
     @Autowired
     private final DateRepository dateRepository;
     @Autowired
+    private final PropertyRepository propertyRepository;
+    @Autowired
     private final UserRepository userRepository;
-    public JSController(DateService dateService, DateRepository dateRepository, UserRepository userRepository) {
+    public JSController(DateService dateService, DateRepository dateRepository, PropertyRepository propertyRepository, UserRepository userRepository) {
         this.dateService = dateService;
         this.dateRepository = dateRepository;
+        this.propertyRepository = propertyRepository;
         this.userRepository = userRepository;
     }
     @GetMapping("/book-dates/{propertyId}")
@@ -41,6 +46,22 @@ public class JSController {
             map.put("year", date.getYear());
             map.put("month", date.getMonth());
             map.put("userIsOwner", date.getUser().getId().equals(user.getId()));
+            maps.add(map);
+        }
+        return ResponseEntity.ok(maps);
+    }
+
+    @GetMapping("/coord")
+    public ResponseEntity<List<Map<String, Object>>> TransitCoords(Model model) {
+        List<Property> properties = propertyRepository.findAll();
+
+        List<Map<String, Object>> maps = new ArrayList<>();
+        for (Property property: properties) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("latitude", property.getLatitude());
+            map.put("longitude", property.getLongitude());
+            map.put("name", property.getName());
+            map.put("id", property.getId());
             maps.add(map);
         }
         return ResponseEntity.ok(maps);

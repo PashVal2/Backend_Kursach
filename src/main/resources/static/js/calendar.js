@@ -12,7 +12,6 @@ const pathParts = url.split('/');
 const propertyId = pathParts[pathParts.length - 1].split('_')[1];
 
 let databaseDate = [];
-getDates();
 
 function renderCalendar(date) {
     const year = date.getFullYear();
