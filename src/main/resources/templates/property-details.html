@@ -48,6 +48,12 @@
     <section id="home">
         <h1 th:text="${property.name}"></h1>
     </section>
+    <section class="section-box">
+        <p>Цена: </p>
+        <p th:text="${property.cost}"></p>
+        <p>Описание: </p>
+        <p th:text="${property.description}"></p>
+    </section>
     <div class="calendar">
         <div class="calendar-header">
             <button class="prev-month" onclick="changeMonth(-1)">&#10094;</button>

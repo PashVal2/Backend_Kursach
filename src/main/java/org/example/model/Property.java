@@ -14,8 +14,11 @@ public class Property {
     private double latitude;
     @Column(nullable = false)
     private double longitude;
-    @Column(nullable = false, length = 255)
+    @Lob
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    private double cost;
     public Property() {}
     public Long getId() {
         return id;
@@ -55,5 +58,13 @@ public class Property {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }
