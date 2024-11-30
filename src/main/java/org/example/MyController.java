@@ -71,7 +71,7 @@ public class MyController {
         }
         return "addProperty";
     }
-    @GetMapping(value = "/news")
+    @GetMapping("/news")
     public String getAllNews(Model model, Authentication authentication) {
         List<News> news = newsService.getAllNews();
         model.addAttribute("showLogout", isAuth(authentication));

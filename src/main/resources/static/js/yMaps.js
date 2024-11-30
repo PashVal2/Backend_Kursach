@@ -78,6 +78,6 @@ function getCoord() {
             }
             console.log("Координаты: ", gettedCoord);
             resolve();
-        });
+            });
     })
 }

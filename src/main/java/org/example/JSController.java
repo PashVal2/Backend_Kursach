@@ -1,13 +1,11 @@
 package org.example;
 
-import org.example.model.BookingDates;
-import org.example.model.Dates;
-import org.example.model.Property;
-import org.example.model.User;
+import org.example.model.*;
 import org.example.repos.DateRepository;
 import org.example.service.DateService;
 import org.example.repos.PropertyRepository;
 import org.example.repos.UserRepository;
+import org.example.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,6 +18,8 @@ import java.util.*;
 @RequestMapping("/api")
 public class JSController {
     @Autowired
+    private final NewsService newsService;
+    @Autowired
     private final DateService dateService;
     @Autowired
     private final DateRepository dateRepository;
@@ -27,7 +27,8 @@ public class JSController {
     private final PropertyRepository propertyRepository;
     @Autowired
     private final UserRepository userRepository;
-    public JSController(DateService dateService, DateRepository dateRepository, PropertyRepository propertyRepository, UserRepository userRepository) {
+    public JSController(NewsService newsService, DateService dateService, DateRepository dateRepository, PropertyRepository propertyRepository, UserRepository userRepository) {
+        this.newsService = newsService;
         this.dateService = dateService;
         this.dateRepository = dateRepository;
         this.propertyRepository = propertyRepository;
@@ -52,7 +53,7 @@ public class JSController {
     }
 
     @GetMapping("/coord")
-    public ResponseEntity<List<Map<String, Object>>> TransitCoords(Model model) {
+    public ResponseEntity<List<Map<String, Object>>> postCoords(Model model) {
         List<Property> properties = propertyRepository.findAll();
 
         List<Map<String, Object>> maps = new ArrayList<>();
@@ -66,7 +67,22 @@ public class JSController {
         }
         return ResponseEntity.ok(maps);
     }
+    @GetMapping("/news")
+    public ResponseEntity<List<Map<String, Object>>> postNews(Model model) {
+        List<News> newsFromDb = newsService.getAllNews();
+        List<Map<String, Object>> newsForPage = new ArrayList<>();
 
+        for (News news: newsFromDb) {
+            Map<String, Object> newsObj = new HashMap<>();
+            // System.out.println(news.getTitle());
+            newsObj.put("title", news.getTitle());
+            newsObj.put("tag", news.getTag());
+            newsObj.put("url", news.getUrl());
+            newsForPage.add(newsObj);
+        }
+
+        return ResponseEntity.ok(newsForPage);
+    }
     @PostMapping("/book-dates")
     public ResponseEntity<Map<String, String>> postBookDates(
             @RequestBody List<BookingDates> bookingDates,
