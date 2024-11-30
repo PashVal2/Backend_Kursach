@@ -30,6 +30,7 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-security");
 
+    implementation("org.jsoup:jsoup:1.15.4")
     // Для работы с BCrypt (для хеширования паролей)
     implementation("org.springframework.security:spring-security-crypto");
 }

@@ -1,9 +1,11 @@
-package org.example.repos;
+package org.example.service;
 
 import org.example.model.BookingDates;
 import org.example.model.Dates;
 import org.example.model.Property;
 import org.example.model.User;
+import org.example.repos.DateRepository;
+import org.example.repos.PropertyRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

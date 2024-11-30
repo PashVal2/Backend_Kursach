@@ -49,6 +49,24 @@
         <div class="form-group">
             <label for="name">Название апартаментов:</label>
             <input type="text" id="name" name="name" placeholder="Введите название" required>
+        </div>
+        <div class="form-group">
+            <label for="cost">Цена:</label>
+            <input type="number" id="cost" name="cost" placeholder="Введите цену" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description" placeholder="Введите описание" rows="4" maxlength="255" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="latitude">Широта:</label>
+            <input type="number" id="latitude" name="latitude" step="0.000001" placeholder="Введите широту" required>
+        </div>
+        <div class="form-group">
+            <label for="longitude">Долгота:</label>
+            <input type="number" id="longitude" name="longitude" step="0.000001" placeholder="Введите долготу" required>
+        </div>
+        <div class="form-messages">
             <label class="addLine" th:if="${error == null && isPost}">Апартаменты добавились</label>
             <label class="errorLine" th:if="${error != null}" th:text="${error}"></label>
         </div>

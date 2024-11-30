@@ -2,7 +2,7 @@ package org.example;
 
 import org.example.model.Property;
 import org.example.repos.PropertyRepository;
-import org.example.repos.PropertyService;
+import org.example.service.PropertyService;
 import org.example.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -68,13 +68,13 @@ public class MyController {
         return "addProperty";
     }
     @PostMapping("/addProperty")
-    public String addPropertyPost(Model model, String name, Authentication authentication) {
+    public String addPropertyPost(Model model, String name, Double cost, String description, double latitude, double longitude, Authentication authentication) {
         model.addAttribute("showLogout", isAuth(authentication));
         if(isAuth(authentication)) {
             model.addAttribute("name", authentication.getName());
         }
         try {
-            propertyService.addProperty(name);
+            propertyService.addProperty(name, description, cost, latitude, longitude);
             model.addAttribute("isPost", true);
             return "addProperty";
         }

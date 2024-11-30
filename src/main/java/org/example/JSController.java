@@ -5,7 +5,7 @@ import org.example.model.Dates;
 import org.example.model.Property;
 import org.example.model.User;
 import org.example.repos.DateRepository;
-import org.example.repos.DateService;
+import org.example.service.DateService;
 import org.example.repos.PropertyRepository;
 import org.example.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

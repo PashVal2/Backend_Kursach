@@ -1,6 +1,7 @@
-package org.example.repos;
+package org.example.service;
 
 import org.example.model.Property;
+import org.example.repos.PropertyRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,15 +10,17 @@ public class PropertyService {
     public PropertyService(PropertyRepository propertyRepository) {
         this.propertyRepository = propertyRepository;
     }
-    public void addProperty(String name) {
+    public void addProperty(String name, String description,
+            double cost, double latitude, double longitude) {
         if(propertyRepository.findByName(name).isPresent()) {
             return;
         }
         Property property = new Property();
         property.setName(name);
-        property.setDescription("");
-        property.setLatitude(0.0);
-        property.setLongitude(0.0);
+        property.setDescription(description);
+        property.setCost(cost);
+        property.setLatitude(latitude);
+        property.setLongitude(longitude);
         propertyRepository.save(property);
     }
 }

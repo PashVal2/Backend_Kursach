@@ -1,8 +1,10 @@
-package org.example.repos;
+package org.example.service;
 
 
 import org.example.model.Role;
 import org.example.model.User;
+import org.example.repos.RoleRepository;
+import org.example.repos.UserRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
