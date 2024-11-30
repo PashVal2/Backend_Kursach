@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- Убедитесь, что здесь установлена кодировка UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/dropMenu.css">
-    <link rel="stylesheet" href="/css/map.css">
-    <script src="https://api-maps.yandex.ru/v3/?apikey=c5d15e5b-59a5-4dc0-8436-6ebac21ad6d1&lang=ru_RU"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yandex/ymaps3-default-ui-theme@latest/dist/esm/index.css">
-
-    <title>Недвижимость</title>
+    <link rel="icon" type="image/png" href="/icon/ic.png">
+    <title>Домашняя страница</title>
 </head>
 <body>
 <header>
@@ -47,34 +47,12 @@
 
 <main>
 
-    <section id="home">
-        <h1>Тут вы найдете недвижимость!</h1>
-    </section>
-    <div id="map"></div>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>№</th>
-            <th>Название</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="property : ${properties}">
-            <td th:text="${property.id}"></td>
-            <td>
-                <a th:href="@{/property/{name}_{id}(id=${property.id}, name=${property.name})}" th:text="${property.name}"></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
 </main>
 
-<footer>
+<footer class="container">
     <p>&copy; 2024 Система управления арендой недвижимости</p>
 </footer>
 
 </body>
 <script src="/js/menu.js"></script>
-<script type="module" src="/js/yMaps.js"></script>
 </html>

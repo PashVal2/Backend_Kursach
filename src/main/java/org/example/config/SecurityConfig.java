@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeRequests(auth -> { // доступ для не зарегестрированного юзера
                     auth.antMatchers(
-                            "/", "/index", "/login", "/js/**",
+                            "/", "/index", "/login", "/js/**", "/news",
                             "/register", "/css/**", "/property", "/icon/**", "/api/**"
                     ).permitAll();
                     auth.antMatchers("/addProperty").hasRole("ADMIN");
