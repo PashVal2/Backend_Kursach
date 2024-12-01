@@ -1,5 +1,5 @@
 plugins {
-    id("org.springframework.boot") version "2.7.13" // Обновлённая версия
+    id("org.springframework.boot") version "2.7.13"
     id("io.spring.dependency-management") version "1.1.2"
     kotlin("jvm") version "1.8.20"
     kotlin("plugin.spring") version "1.8.20"
@@ -23,9 +23,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-    }
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     implementation("org.springframework.boot:spring-boot-starter-security");
@@ -33,6 +31,8 @@ dependencies {
     implementation("org.jsoup:jsoup:1.15.4")
     // Для работы с BCrypt (для хеширования паролей)
     implementation("org.springframework.security:spring-security-crypto");
+
+    testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

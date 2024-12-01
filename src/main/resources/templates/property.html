@@ -56,6 +56,7 @@
         <tr>
             <th>№</th>
             <th>Название</th>
+            <th>Цена</th>
         </tr>
         </thead>
         <tbody>
@@ -64,6 +65,7 @@
             <td>
                 <a th:href="@{/property/{name}_{id}(id=${property.id}, name=${property.name})}" th:text="${property.name}"></a>
             </td>
+            <td th:text="${property.cost}"></td>
         </tr>
         </tbody>
     </table>

@@ -22,10 +22,10 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    @Bean
+    @Bean // проверка пользователся
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userService);  // Здесь передаем ваш UserService
+        authProvider.setUserDetailsService(userService);  // Здесь сервис
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -33,8 +33,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-                .authorizeRequests(auth -> { // доступ для не зарегестрированного юзера
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .authorizeRequests(auth -> {
                     auth.antMatchers(
                             "/", "/index", "/login", "/js/**", "/news",
                             "/register", "/css/**", "/property", "/icon/**", "/api/**"
