@@ -16,7 +16,8 @@ public class User {
     private Role role;
     // Конструкторы, геттеры и сеттеры
     public User() {}
-    public User(String username, String password) {
+    public User(Long id, String username, String password) {
+        this.id = id;
         this.name = username;
         this.password = password;
     }

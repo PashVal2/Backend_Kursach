@@ -20,6 +20,14 @@ public class Property {
     @Column(nullable = false)
     private double cost;
     public Property() {}
+    public Property(Long id, String name, double latitude, double longitude) {
+        this.id = id;
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.description = "Test Description";
+        this.cost = 0.0;
+    }
     public Long getId() {
         return id;
     }

@@ -18,12 +18,13 @@ public class Dates {
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
     public Dates() {}
-    public Dates(Long id, int year,
-                 int month, int day) {
+    public Dates(Long id, int year, int month, int day, User user, Property property) {
         this.id = id;
+        this.year = year;
         this.month = month;
         this.day = day;
-        this.year = year;
+        this.user = user;
+        this.property = property;
     }
     public void setDate(BookingDates dates) {
         this.month = dates.getMonth();
