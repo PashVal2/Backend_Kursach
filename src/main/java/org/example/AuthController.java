@@ -37,7 +37,7 @@ public class AuthController {
         try {
             userService.register(username, password);
             return "redirect:/login";
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             model.addAttribute("error", "Пользователь с таким именем уже существует");
             return "register";
         }
