@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeRequests(auth -> {
                     auth.antMatchers(
-                            "/", "/index", "/login", "/js/**", "/news",
+                            "/", "/index", "/login", "/js/**", "/news", "/accessDenied",
                             "/register", "/css/**", "/property", "/icon/**", "/api/**"
                     ).permitAll();
                     auth.antMatchers("/addProperty").hasRole("ADMIN");
@@ -53,6 +53,9 @@ public class SecurityConfig {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll()
+                )
+                .exceptionHandling(exception ->
+                        exception.accessDeniedPage("/accessDenied")
                 )
                 .authenticationProvider(authenticationProvider());
         return http.build();

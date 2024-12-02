@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.model.News;
 import org.example.model.Property;
 import org.example.repos.PropertyRepository;
 import org.example.repos.UserRepository;
@@ -73,7 +72,6 @@ public class MyController {
     }
     @GetMapping("/news")
     public String getAllNews(Model model, Authentication authentication) {
-        List<News> news = newsService.getAllNews();
         model.addAttribute("showLogout", isAuth(authentication));
         model.addAttribute("ADMIN", isAdmin(authentication));
         if(isAuth(authentication)) {

@@ -10,6 +10,10 @@ body {
     justify-content: space-between
 }
 
+a {
+    color: #2c3e50;
+}
+
 .container {
     height: 100%;
 }
