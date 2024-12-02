@@ -14,6 +14,13 @@ public class News {
     private String url;
     @Column(nullable = false, length = 255)
     private String tag;
+    public News() {}
+    public News(String title, String tag, String url) {
+        this.title = title;
+        this.tag = tag;
+        this.url = url;
+    }
+
     public Long getId() {
         return id;
     }

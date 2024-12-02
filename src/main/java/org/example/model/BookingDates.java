@@ -12,7 +12,12 @@ public class BookingDates {
         this.property_id = property_id;
         this.month = date.getMonth();
     }
-
+    public BookingDates(int year, int month, int day, Long property_id) {
+        this.day = day;
+        this.year = year;
+        this.property_id = property_id;
+        this.month = month;
+    }
     @Override
     public String toString() {
         return year + "-" + month + "-" + day;

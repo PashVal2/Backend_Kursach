@@ -102,7 +102,7 @@ public class JSController {
         }
         dateService.addDates(bookingDates, user);
         Map<String, String> response = new HashMap<>();
-        response.put("messege", "Даты добавленны");
+        response.put("message", "Даты добавленны");
         return ResponseEntity.ok(response);
     }
 }

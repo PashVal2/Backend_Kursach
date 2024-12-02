@@ -20,6 +20,7 @@ public class User {
         this.id = id;
         this.name = username;
         this.password = password;
+        this.role = new Role(1L, "USER");
     }
     // Геттеры и сеттеры
     public Long getId() {

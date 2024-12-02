@@ -1,10 +1,11 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Main;
-import org.example.model.Dates;
-import org.example.model.Property;
-import org.example.model.User;
+import org.example.model.*;
 import org.example.repos.DateRepository;
 import org.example.repos.PropertyRepository;
 import org.example.repos.UserRepository;
+import org.example.service.DateService;
+import org.example.service.NewsService;
 import org.example.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,10 +17,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,6 +40,10 @@ public class JSControllerTest {
     private UserRepository userRepository;
     @MockBean
     private PropertyRepository propertyRepository;
+    @MockBean
+    private NewsService newsService;
+    @MockBean
+    private DateService dateService;
     private String name;
     @BeforeEach
     void setUP() {
@@ -69,5 +77,38 @@ public class JSControllerTest {
                 .andExpect(jsonPath("$[0].longitude").value(10))
                 .andExpect(jsonPath("$[0].name").value("Test Property"))
                 .andExpect(jsonPath("$[0].id").value(1));
+    }
+    @Test
+    void testPostNews() throws Exception {
+        News news = new News("Title", "Tag", "https://example.com");
+        Mockito.when(newsService.getAllNews()).thenReturn(List.of(news));
+
+        mockMvc.perform(get("/api/news"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].title").value("Title"))
+                .andExpect(jsonPath("$[0].tag").value("Tag"))
+                .andExpect(jsonPath("$[0].url").value("https://example.com"));
+    }
+    @Test
+    @WithMockUser(username = "testName")
+    void testPostBookDates() throws Exception {
+        // Создаем список дат
+        List<BookingDates> bookingDatesList = new ArrayList<>();
+        bookingDatesList.add(new BookingDates(2024, 12, 1, 1L)); // дата 1
+        bookingDatesList.add(new BookingDates(2024, 12, 2, 2L)); // дата 2
+
+        User user = new User(1L, "testName", "12345678");
+        Mockito.when(userRepository.findByName("testName")).thenReturn(Optional.of(user));
+        dateService.addDates(bookingDatesList, user);
+        String bookingDatesJson = new ObjectMapper().writeValueAsString(bookingDatesList);
+
+        mockMvc.perform(post("/api/book-dates")
+                        .contentType("application/json")
+                        .content(bookingDatesJson))  // Передаем правильный объект
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("Даты добавленны"));
+
+        Mockito.verify(dateService).addDates(bookingDatesList, user);
     }
 }

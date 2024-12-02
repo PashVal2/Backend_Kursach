@@ -20,7 +20,7 @@ public class NewsService {
         News news = new News();
         news.setTitle(title);
         news.setUrl(url);
-         news.setTag(tag);
+        news.setTag(tag);
 
         newsRepository.save(news);
     }
