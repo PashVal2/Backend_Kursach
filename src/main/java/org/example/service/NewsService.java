@@ -5,6 +5,7 @@ import org.example.repos.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,6 +29,8 @@ public class NewsService {
         return newsRepository.findByTitle(title).isPresent();
     }
     public List<News> getAllNews() {
-        return newsRepository.findAll();
+        List<News> news = newsRepository.findAll();
+        Collections.reverse(news);
+        return news;
     }
 }
