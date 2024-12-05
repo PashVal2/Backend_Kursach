@@ -4,6 +4,8 @@ import org.example.model.Property;
 import org.example.repos.PropertyRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PropertyService {
     private final PropertyRepository propertyRepository;
@@ -21,6 +23,18 @@ public class PropertyService {
         property.setCost(cost);
         property.setLatitude(latitude);
         property.setLongitude(longitude);
+        propertyRepository.save(property);
+    }
+
+    public void deleteById(Long propertyId) {
+        propertyRepository.deleteById(propertyId);
+    }
+
+    public Optional<Property> findById(Long propertyId) {
+        return propertyRepository.findById(propertyId);
+    }
+
+    public void save(Property property) {
         propertyRepository.save(property);
     }
 }

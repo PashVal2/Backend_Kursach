@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static org.example.MyController.isAuth;
+import static org.example.job.AuthCheker.isAuth;
 
 @Controller
 public class AuthController {

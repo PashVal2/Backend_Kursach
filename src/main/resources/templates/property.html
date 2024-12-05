@@ -66,6 +66,12 @@
                 <a th:href="@{/property/{name}_{id}(id=${property.id}, name=${property.name})}" th:text="${property.name}"></a>
             </td>
             <td th:text="${property.cost}"></td>
+            <td th:if="${ADMIN}">
+                <form action="/deleteProperty" method="post">
+                    <input type="hidden" name="property_id" th:value="${property.id}" />
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

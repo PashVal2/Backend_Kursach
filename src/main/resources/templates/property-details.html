@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/calendar.css">
     <link rel="stylesheet" href="/css/dropMenu.css">
+    <link rel="stylesheet" href="/css/reg.css">
     <title>Документ</title>
 </head>
 <body>
@@ -48,6 +49,25 @@
 <main>
     <section id="home">
         <h1 th:text="${property.name}"></h1>
+    </section>
+    <section th:if="${ADMIN}">
+        <form action="/editProperty" method="post">
+            <div class="form-group">
+                <label for="cost">Цена:</label>
+                <input type="number" id="cost" name="cost" placeholder="Введите новую цену" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Описание:</label>
+                <textarea id="description" name="description" placeholder="Введите новое описание" rows="4" maxlength="255" required></textarea>
+            </div>
+            <input type="hidden" name="id" th:value="${property.id}" />
+            <input type="hidden" name="name" th:value="${property.name}" />
+            <div class="form-messages">
+                <label class="addLine" th:if="${error == null && isPost != null && isPost}">Изменения сохранены</label>
+                <label class="errorLine" th:if="${error != null}" th:text="${error}"></label>
+            </div>
+            <button type="submit">Сохранить</button>
+        </form>
     </section>
     <section class="section-box">
         <p>Цена: </p>

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+import static org.example.job.AuthCheker.isAdmin;
+import static org.example.job.AuthCheker.isAuth;
+
 @Controller
 public class MyController {
     @Autowired
@@ -29,7 +32,6 @@ public class MyController {
     }
     @GetMapping("/property")
     public String getProperty(Model model, Authentication authentication) {
-        // Получаем всех пользователей из базы данных
         List<Property> properties = propertyRepository.findAll();
         model.addAttribute("properties", properties);
         model.addAttribute("showLogout", isAuth(authentication));
@@ -51,7 +53,7 @@ public class MyController {
     }
     @GetMapping("/property/{name}_{id}")
     public String getSpecificProperties(@PathVariable Long id, @PathVariable String name,
-            Model model, Authentication authentication) {
+                                        Model model, Authentication authentication) {
         Property property = propertyRepository.findById(id).orElse(null);
         model.addAttribute("property", property);
         model.addAttribute("showLogout", isAuth(authentication));
@@ -93,28 +95,6 @@ public class MyController {
         catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
             return "addProperty";
-        }
-    }
-    public static boolean isAuth(Authentication authentication) {
-        if (authentication != null &&
-            authentication.isAuthenticated()) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public static boolean isAdmin(Authentication authentication) {
-        if (authentication != null &&
-                !authentication.getAuthorities().isEmpty()) {
-            String role = authentication.getAuthorities().iterator().next().getAuthority();
-            System.out.println("Role: " + role);
-            if (role.equals("ROLE_ADMIN")) {
-                return true;
-            }
-            return false;
-        } else {
-            return false;
         }
     }
 }

@@ -51,11 +51,9 @@ public class JSController {
         }
         return ResponseEntity.ok(maps);
     }
-
     @GetMapping("/coord")
     public ResponseEntity<List<Map<String, Object>>> getCoords(Model model) {
         List<Property> properties = propertyRepository.findAll();
-
         List<Map<String, Object>> maps = new ArrayList<>();
         for (Property property: properties) {
             Map<String, Object> map = new HashMap<>();
