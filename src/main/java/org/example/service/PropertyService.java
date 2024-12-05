@@ -4,6 +4,7 @@ import org.example.model.Property;
 import org.example.repos.PropertyRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,5 +37,9 @@ public class PropertyService {
 
     public void save(Property property) {
         propertyRepository.save(property);
+    }
+
+    public List<Property> findAll() {
+        return propertyRepository.findAll();
     }
 }

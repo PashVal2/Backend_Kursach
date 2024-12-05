@@ -1,14 +1,12 @@
-package org.example;
+package org.example.controller;
 
 import org.example.model.Dates;
 import org.example.model.Property;
 import org.example.model.User;
 import org.example.repos.DateRepository;
-import org.example.repos.PropertyRepository;
-import org.example.repos.UserRepository;
 import org.example.service.DateService;
 import org.example.service.PropertyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -28,21 +26,18 @@ import static org.example.job.AuthCheker.isAuth;
 
 @Controller
 public class PropertyDetailController {
-    @Autowired
-    private PropertyRepository propertyRepository;
-    private final DateRepository dateRepository;
-    private PropertyService propertyService;
-    private final UserRepository userRepository;
-    public PropertyDetailController(PropertyRepository propertyRepository, DateRepository dateRepository, PropertyService propertyService, DateService dateService, UserRepository userRepository) {
-        this.propertyRepository = propertyRepository;
-        this.dateRepository = dateRepository;
+    private final PropertyService propertyService;
+    private final UserService userService;
+    private final DateService dateService;
+    public PropertyDetailController(DateRepository dateRepository, PropertyService propertyService, UserService userService, DateService dateService) {
         this.propertyService = propertyService;
-        this.userRepository = userRepository;
+        this.userService = userService;
+        this.dateService = dateService;
     }
     @GetMapping("/property/{name}_{id}")
     public String getSpecificProperties(@PathVariable Long id, @PathVariable String name,
                                         Model model, Authentication authentication) {
-        Property property = propertyRepository.findById(id).orElse(null);
+        Property property = propertyService.findById(id).orElse(null);
         model.addAttribute("property", property);
         model.addAttribute("showLogout", isAuth(authentication));
         model.addAttribute("ADMIN", isAdmin(authentication));
@@ -74,8 +69,8 @@ public class PropertyDetailController {
     @GetMapping("/book-dates/{propertyId}")
     public ResponseEntity<List<Map<String, Object>>> TransitDates(
             @PathVariable Long propertyId, Authentication authentication) {
-        List<Dates> dates = dateRepository.findByPropertyId(propertyId);
-        User user = userRepository.findByName(authentication.getName()).get();
+        List<Dates> dates = dateService.findByPropertyId(propertyId);
+        User user = userService.findByName(authentication.getName()).get();
 
         List<Map<String, Object>> maps = new ArrayList<>();
         for (Dates date: dates) {

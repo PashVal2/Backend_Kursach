@@ -1,11 +1,9 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.Main;
 import org.example.model.*;
-import org.example.repos.DateRepository;
-import org.example.repos.PropertyRepository;
-import org.example.repos.UserRepository;
 import org.example.service.DateService;
 import org.example.service.NewsService;
+import org.example.service.PropertyService;
 import org.example.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,11 +33,7 @@ public class JSControllerTest {
     @MockBean
     private UserService userService;
     @MockBean
-    private DateRepository dateRepository;
-    @MockBean
-    private UserRepository userRepository;
-    @MockBean
-    private PropertyRepository propertyRepository;
+    private PropertyService propertyService;
     @MockBean
     private NewsService newsService;
     @MockBean
@@ -57,8 +51,8 @@ public class JSControllerTest {
         Property property = new Property(propertyId, "Test Property", 10.0, 20.0);
         Dates date = new Dates(1L, 2024, 12, 1, user, property);
 
-        Mockito.when(userRepository.findByName(name)).thenReturn(Optional.of(user));
-        Mockito.when(dateRepository.findByPropertyId(propertyId)).thenReturn(List.of(date));
+        Mockito.when(userService.findByName(name)).thenReturn(Optional.of(user));
+        Mockito.when(dateService.findByPropertyId(propertyId)).thenReturn(List.of(date));
 
         mockMvc.perform(get("/api/book-dates/{propertyId}", propertyId))
                 .andExpect(status().isOk())
@@ -70,7 +64,7 @@ public class JSControllerTest {
     @Test
     void testGetCoord() throws Exception {
         Property property = new Property(1L, "Test Property", 10, 10);
-        Mockito.when(propertyRepository.findAll()).thenReturn(List.of(property));
+        Mockito.when(propertyService.findAll()).thenReturn(List.of(property));
         mockMvc.perform(get("/api/coord"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].latitude").value(10))
@@ -98,7 +92,7 @@ public class JSControllerTest {
         bookingDatesList.add(new BookingDates(2024, 12, 2, 2L)); // дата 2
 
         User user = new User(1L, "testName", "12345678");
-        Mockito.when(userRepository.findByName("testName")).thenReturn(Optional.of(user));
+        Mockito.when(userService.findByName("testName")).thenReturn(Optional.of(user));
         dateService.addDates(bookingDatesList, user);
         String bookingDatesJson = new ObjectMapper().writeValueAsString(bookingDatesList);
 

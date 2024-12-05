@@ -1,44 +1,38 @@
-package org.example;
+package org.example.controller;
 
 import org.example.model.*;
-import org.example.repos.DateRepository;
 import org.example.service.DateService;
-import org.example.repos.PropertyRepository;
-import org.example.repos.UserRepository;
 import org.example.service.NewsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.service.PropertyService;
+import org.example.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class JSController {
-    @Autowired
     private final NewsService newsService;
-    @Autowired
     private final DateService dateService;
-    @Autowired
-    private final DateRepository dateRepository;
-    @Autowired
-    private final PropertyRepository propertyRepository;
-    @Autowired
-    private final UserRepository userRepository;
-    public JSController(NewsService newsService, DateService dateService, DateRepository dateRepository, PropertyRepository propertyRepository, UserRepository userRepository) {
+    private final PropertyService propertyService;
+    private final UserService userService;
+    public JSController(NewsService newsService, DateService dateService, PropertyService propertyService, UserService userService) {
         this.newsService = newsService;
         this.dateService = dateService;
-        this.dateRepository = dateRepository;
-        this.propertyRepository = propertyRepository;
-        this.userRepository = userRepository;
+        this.propertyService = propertyService;
+        this.userService = userService;
     }
     @GetMapping("/book-dates/{propertyId}")
     public ResponseEntity<List<Map<String, Object>>> TransitDates(
         @PathVariable Long propertyId, Authentication authentication) {
-        List<Dates> dates = dateRepository.findByPropertyId(propertyId);
-        User user = userRepository.findByName(authentication.getName()).get();
+        List<Dates> dates = dateService.findByPropertyId(propertyId);
+        User user = userService.findByName(authentication.getName()).get();
 
         List<Map<String, Object>> maps = new ArrayList<>();
         for (Dates date: dates) {
@@ -53,7 +47,7 @@ public class JSController {
     }
     @GetMapping("/coord")
     public ResponseEntity<List<Map<String, Object>>> getCoords(Model model) {
-        List<Property> properties = propertyRepository.findAll();
+        List<Property> properties = propertyService.findAll();
         List<Map<String, Object>> maps = new ArrayList<>();
         for (Property property: properties) {
             Map<String, Object> map = new HashMap<>();
@@ -78,7 +72,6 @@ public class JSController {
             newsObj.put("url", news.getUrl());
             newsForPage.add(newsObj);
         }
-
         return ResponseEntity.ok(newsForPage);
     }
     @PostMapping("/book-dates")
@@ -91,7 +84,7 @@ public class JSController {
         }
         User user = new User();
         try {
-            user = userRepository.findByName(
+            user = userService.findByName(
                 authentication.getName()
             ).get();
         }

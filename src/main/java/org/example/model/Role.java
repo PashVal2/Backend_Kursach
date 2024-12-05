@@ -15,7 +15,6 @@ public class Role {
         this.name = name;
         this.id = id;
     }
-
     public Long getId() {
         return id;
     }

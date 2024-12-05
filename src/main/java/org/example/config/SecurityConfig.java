@@ -39,7 +39,7 @@ public class SecurityConfig {
                             "/", "/index", "/login", "/js/**", "/news", "/accessDenied",
                             "/register", "/css/**", "/property", "/icon/**", "/api/**"
                     ).permitAll();
-                    auth.antMatchers("/addProperty").hasRole("ADMIN");
+                    auth.antMatchers("/addProperty", "/editProperty", "/deleteProperty").hasRole("ADMIN");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin(form -> form // обработка post запроса из...

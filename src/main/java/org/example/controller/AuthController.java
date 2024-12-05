@@ -1,4 +1,4 @@
-package org.example;
+package org.example.controller;
 
 import org.example.service.UserService;
 import org.springframework.security.core.Authentication;

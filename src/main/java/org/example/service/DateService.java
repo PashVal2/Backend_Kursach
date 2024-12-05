@@ -38,4 +38,8 @@ public class DateService {
             dateRepository.save(date);
         }
     }
+
+    public List<Dates> findByPropertyId(Long propertyId) {
+        return dateRepository.findByPropertyId(propertyId);
+    }
 }

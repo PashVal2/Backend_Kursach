@@ -69,6 +69,7 @@
             <td th:if="${ADMIN}">
                 <form action="/deleteProperty" method="post">
                     <input type="hidden" name="property_id" th:value="${property.id}" />
+                    <input type="hidden" name="_method" value="DELETE" />
                     <button type="submit">Удалить</button>
                 </form>
             </td>
