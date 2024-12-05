@@ -6,7 +6,7 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 @Configuration
 public class WebConfig {
-    @Bean
+    @Bean // позволяет обрабатывать скрытые HTTP-методы - DELETE
     public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
         return new HiddenHttpMethodFilter();
     }

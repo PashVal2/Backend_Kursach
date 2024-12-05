@@ -1,6 +1,6 @@
 package org.example.model;
 
-public class BookingDates {
+public class BookingDates { // даты и данные для JSON
     private int year;
     private int month;
     private int day;

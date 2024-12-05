@@ -20,7 +20,7 @@ public class PropertyController {
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
-    @GetMapping("/property")
+    @GetMapping("/property")  // Метод для обработки GET-запроса на страницу
     public String getProperty(Model model, Authentication authentication) {
         List<Property> properties = propertyService.findAll();
         model.addAttribute("properties", properties);
@@ -31,7 +31,7 @@ public class PropertyController {
         }
         return "property"; // Имя HTML-шаблона, который мы создадим
     }
-    @DeleteMapping("/deleteProperty")
+    @DeleteMapping("/deleteProperty") // Метод для обработки DELETE-запроса на удаление объекта недвижимости
     public String deleteProperty(@RequestParam("property_id") Long propertyId, Model model) {
         try {
             propertyService.deleteById(propertyId);

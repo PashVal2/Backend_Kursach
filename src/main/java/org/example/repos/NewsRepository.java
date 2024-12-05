@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-@Repository
+@Repository // CRUD-операции над News
 public interface NewsRepository extends JpaRepository<News, Long> {
     Optional<News> findByTitle(String title);
     Optional<News> findById(Long id);

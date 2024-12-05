@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service // сервис для Dates
 public class DateService {
     private final DateRepository dateRepository;
     private final PropertyRepository propertyRepository;

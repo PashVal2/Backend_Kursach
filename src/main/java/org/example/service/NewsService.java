@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 
-@Service
+@Service // сервис для News
 public class NewsService {
     @Autowired
     private final NewsRepository newsRepository;

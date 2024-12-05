@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository // CRUD-операции над Dates
 public interface DateRepository extends JpaRepository<Dates, Long> {
     List<Dates> findByYearAndMonthAndDayAndPropertyId(int year, int month, int day, Long propertyId);
     List<Dates> findByPropertyId(Long PropertyId);

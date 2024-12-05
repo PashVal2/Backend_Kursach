@@ -3,7 +3,7 @@ package org.example.model;
 import javax.persistence.*;
 
 @Entity
-public class Property {
+public class Property { // недвижимость
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "property_id")

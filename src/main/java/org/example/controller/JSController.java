@@ -28,7 +28,7 @@ public class JSController {
         this.propertyService = propertyService;
         this.userService = userService;
     }
-    @GetMapping("/book-dates/{propertyId}")
+    @GetMapping("/book-dates/{propertyId}") // GET-запрос для получения дат бронирования для конкретного объекта недвижимости по его ID
     public ResponseEntity<List<Map<String, Object>>> TransitDates(
         @PathVariable Long propertyId, Authentication authentication) {
         List<Dates> dates = dateService.findByPropertyId(propertyId);
@@ -45,7 +45,7 @@ public class JSController {
         }
         return ResponseEntity.ok(maps);
     }
-    @GetMapping("/coord")
+    @GetMapping("/coord") // GET-запрос для координат всей недвижимости
     public ResponseEntity<List<Map<String, Object>>> getCoords(Model model) {
         List<Property> properties = propertyService.findAll();
         List<Map<String, Object>> maps = new ArrayList<>();
@@ -59,7 +59,7 @@ public class JSController {
         }
         return ResponseEntity.ok(maps);
     }
-    @GetMapping("/news")
+    @GetMapping("/news") // GET-запрос для получения всей информации о новостях из бд
     public ResponseEntity<List<Map<String, Object>>> postNews(Model model) {
         List<News> newsFromDb = newsService.getAllNews();
         List<Map<String, Object>> newsForPage = new ArrayList<>();
@@ -74,7 +74,7 @@ public class JSController {
         }
         return ResponseEntity.ok(newsForPage);
     }
-    @PostMapping("/book-dates")
+    @PostMapping("/book-dates") // Обрабатывает POST-запрос для добавления дат бронирования
     public ResponseEntity<Map<String, String>> postBookDates(
             @RequestBody List<BookingDates> bookingDates,
             Authentication authentication, Model model) {

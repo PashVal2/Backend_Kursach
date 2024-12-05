@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service // сервис для Property
 public class PropertyService {
     private final PropertyRepository propertyRepository;
     public PropertyService(PropertyRepository propertyRepository) {

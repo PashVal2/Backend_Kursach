@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
+@Service // сервис для User
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -46,7 +46,7 @@ public class UserService implements UserDetailsService {
         // Сохранение пользователя в базе данных
         userRepository.save(user);
     }
-    @Override
+    @Override // кастомный сервис для spring security
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         // System.out.println("Username: " + name);
         User user = userRepository.findByName(name)

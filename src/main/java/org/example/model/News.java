@@ -3,7 +3,7 @@ package org.example.model;
 import javax.persistence.*;
 
 @Entity
-public class News {
+public class News { // новости
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "news_id")

@@ -3,7 +3,7 @@ package org.example.model;
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class User { // юзер
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

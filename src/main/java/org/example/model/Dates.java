@@ -3,7 +3,7 @@ package org.example.model;
 import javax.persistence.*;
 
 @Entity
-public class Dates {
+public class Dates { // даты
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "date_id")

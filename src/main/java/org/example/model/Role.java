@@ -3,7 +3,7 @@ package org.example.model;
 import javax.persistence.*;
 
 @Entity
-public class Role {
+public class Role { // роль у юзера
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")

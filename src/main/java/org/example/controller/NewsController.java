@@ -10,7 +10,7 @@ import static org.example.job.AuthCheker.isAuth;
 
 @Controller
 public class NewsController {
-    @GetMapping("/news")
+    @GetMapping("/news") // Обрабатывает GET-запрос для отображения страницы с новостями
     public String getAllNews(Model model, Authentication authentication) {
         model.addAttribute("showLogout", isAuth(authentication));
         model.addAttribute("ADMIN", isAdmin(authentication));

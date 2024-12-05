@@ -15,7 +15,7 @@ public class AddPropertyController {
     public AddPropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
-    @PostMapping("/addProperty")
+    @PostMapping("/addProperty") // POST-запрос для добавления новой недвижимости
     public String addPropertyPost(Model model, String name, Double cost, String description, double latitude, double longitude, Authentication authentication) {
         model.addAttribute("showLogout", isAuth(authentication));
         if(isAuth(authentication)) {
@@ -31,7 +31,7 @@ public class AddPropertyController {
             return "addProperty";
         }
     }
-    @GetMapping("/addProperty")
+    @GetMapping("/addProperty") // GET-запрос для страницы для админов для добавления недвижимости
     public String addProperty(Model model, Authentication authentication) {
         model.addAttribute("showLogout", isAuth(authentication));
         model.addAttribute("isPost", false);

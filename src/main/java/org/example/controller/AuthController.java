@@ -15,7 +15,7 @@ public class AuthController {
     public AuthController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping("/register")
+    @GetMapping("/register") // GET-запрос страници регистрации
     public String showRegistrationPage(Model model, Authentication authentication) {
         model.addAttribute("showLogout", isAuth(authentication));
         if(isAuth(authentication)) {
@@ -23,7 +23,7 @@ public class AuthController {
         }
         return "register";
     }
-    @PostMapping("/register")
+    @PostMapping("/register") // POST-запрос для добавления нового юзера
     public String registerUser(String username, String password, Authentication authentication,
            String confirmPassword, Model model) {
         model.addAttribute("showLogout", isAuth(authentication));
@@ -42,7 +42,7 @@ public class AuthController {
             return "register";
         }
     }
-    @GetMapping("/login")
+    @GetMapping("/login") // GET-запрос страници входа
     public String showLoginPage(Model model, Authentication authentication) {
         model.addAttribute("showLogout", isAuth(authentication));
         if(isAuth(authentication)) {

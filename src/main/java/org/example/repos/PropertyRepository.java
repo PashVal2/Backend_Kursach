@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository
+@Repository // CRUD-операции над Property
 public interface PropertyRepository extends JpaRepository<Property, Long> {
     Optional<Property> findByName(String name);
 }

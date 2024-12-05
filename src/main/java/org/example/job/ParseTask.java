@@ -16,7 +16,7 @@ public class ParseTask {
     @Autowired
     NewsService newsService;
     @Scheduled(fixedDelay = 3600000)
-    public void parseNewNews() {
+    public void parseNewNews() { // парсер новостей по html разметке
         String url = "https://realty.rbc.ru/";
         try {
             Document document = Jsoup.connect(url)

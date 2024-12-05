@@ -10,7 +10,7 @@ import static org.example.job.AuthCheker.isAuth;
 
 @Controller
 public class IndexController {
-    @GetMapping("/")
+    @GetMapping("/") //  GET-запрос главной страницы
     public String index(Model model, Authentication authentication) {
         model.addAttribute("message", "b");
         model.addAttribute("showLogout", isAuth(authentication));
