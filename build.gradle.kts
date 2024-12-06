@@ -39,6 +39,10 @@ dependencies {
     testImplementation("org.junit.platform:junit-platform-suite-api:1.8.2")
 }
 
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
