@@ -21,7 +21,7 @@
 
 - **Back-end**:
   - Java
-  - Spring Framework (Spring Boot, Spring Data, Spring Security)
+  - Spring Framework (Spring Boot, Spring Security)
 
 - **Front-end**:
   - Thymeleaf
